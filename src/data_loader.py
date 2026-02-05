@@ -6,7 +6,7 @@
 #    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 15:34:29 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 15:43:32 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/05 17:24:50 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,40 @@ def load_data(filepath):
         print(f"✗ Error loading data: {e}")
         return None
     
-# Example usage:
-data = load_data('./data/data.csv')
-#print the first few rows of the data if it was loaded successfully
-if data is not None:
-    print(data.head())
+
+
+#mormalize the data
+def normalize_data(data):
+    """
+    Function to normalize the data using  z-score normalization.
+    Args:
+        data (pd.DataFrame): The DataFrame containing the data to be normalized.
+        
+    Returns:
+        Tuple: (normalized_data, stats) where normalized_data is a DataFrame with normalized values,
+        and stats is a dictionary containing the mean and standard deviation for each column.        
+    """
+    
+    km_mean = data['km'].mean()
+    km_std = data['km'].std()
+    price_mean = data['price'].mean()
+    price_std = data['price'].std()
+    
+    normalized_data = data.copy()
+    normalized_data['km'] = (data['km'] - km_mean) / km_std
+    normalized_data['price'] = (data['price'] - price_mean) / price_std
+    
+    stats = {
+        'km_mean': km_mean,
+        'km_std': km_std,
+        'price_mean': price_mean,
+        'price_std': price_std
+    }
+    
+    print(f"✓Data normalization complete.")
+    print(f"  - KM: μ={km_mean:.0f}, σ={km_std:.0f}")
+    print(f"  - Prix: μ={price_mean:.0f}, σ={price_std:.0f}")
+    
+    return normalized_data, stats
+
+    

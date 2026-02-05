@@ -6,7 +6,7 @@
 #    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 16:27:33 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 17:20:12 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/05 17:26:17 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,16 @@ def main():
     if data is not None:
         # Normalize the data
         print("-" * 60)
-
+        normalized_data, norm_stats = normalize_data(data)
+        print("✓Data normalized successfully.")
+        print(f"✓Normalization stats: {norm_stats}")
+        print("-" * 60)
+        print("✓First 5 rows of normalized data:")
+        print(normalized_data.head())        
         # Visualize the original data
-        plot = plot_data(data)
+        plot = plot_data(normalized_data, title="Normalized data visualization (km vs price)")
         # plot.show()
-        save_plot(plot, './plot/original_data_plot.png')
+        save_plot(plot, './plot/normalized_data_plot.png')
         
 if __name__ == "__main__":
     main()

@@ -272,3 +272,5 @@ This project serves as a solid first step into machine learning.
 After running the project, you should see:
 * A plot of the original data (mileage vs price)
 ![original_data](./plot/original_data_plot.png)
+* A plot of the normalized data (mileage vs price)
+![normalized_data](./plot/normalized_data_plot.png)
