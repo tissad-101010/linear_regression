@@ -243,6 +243,32 @@ The objective of this project is to:
 
 This project serves as a solid first step into machine learning.
 
+## Requirements
+* Python 3.8 or higher
+* NumPy
+* Pandas
+* Matplotlib
 
 ## Ressources:
  - [Normalization - Wikipedia](https://en.wikipedia.org/wiki/Standard_score)
+
+## RUN THE PROJECT
+1. Clone the repository
+2. Install dependencies
+    ``` bash
+    pip install -r requirements.txt
+    #or
+    make install
+
+    ```
+3. Run
+    ``` bash
+    python src/main.py
+    #or
+    make run
+    ```
+
+## Results
+After running the project, you should see:
+* A plot of the original data (mileage vs price)
+![original_data](./plot/original_data_plot.png)

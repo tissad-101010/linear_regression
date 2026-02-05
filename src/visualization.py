@@ -6,7 +6,7 @@
 #    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 16:24:11 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 16:58:18 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/05 17:11:10 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,3 +34,16 @@ def plot_data(data, title="data visualization (km vs price)"):
     plt.tight_layout()
     return plt
 
+
+
+def save_plot(plt, filename):
+    """
+    Function to save the plot to a file.
+    Args:
+        plt: The matplotlib plot object to be saved.
+        filename (str): The name of the file where the plot will be saved.
+    returns:
+        None
+    """
+    plt.savefig(filename, dpi=300, bbox_inches='tight')
+    print(f"✓ Plot saved as '{filename}'")

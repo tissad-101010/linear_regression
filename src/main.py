@@ -6,7 +6,7 @@
 #    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 16:27:33 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 17:01:39 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/05 17:20:12 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ Docstring pour main
 """
 
 from data_loader import load_data, normalize_data
-from visualization import plot_data
+from visualization import plot_data, save_plot
 
 
 def main():
@@ -31,15 +31,11 @@ def main():
     if data is not None:
         # Normalize the data
         print("-" * 60)
-        normalized_data, norm_stats = normalize_data(data)
-        print("✓Data normalized successfully.")
-        print(f"✓Normalization stats: {norm_stats}")
-        print("-" * 60)
-        print("✓First 5 rows of normalized data:")
-        print(normalized_data.head())        
+
         # Visualize the original data
         plot = plot_data(data)
-        plot.show()
+        # plot.show()
+        save_plot(plot, './plot/original_data_plot.png')
         
 if __name__ == "__main__":
     main()
