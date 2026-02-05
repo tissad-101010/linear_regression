@@ -177,6 +177,7 @@ ___
     y_std = np.std(y)          # σᵧ = 1,320
     y_norm = (y - y_mean) / y_std
 ```
+
 ___
 ### **Step 3:** Initialize `θ0 = 0` and `θ1 = 0`
 ```python
@@ -241,3 +242,7 @@ The objective of this project is to:
 * Build intuition before moving to more complex models
 
 This project serves as a solid first step into machine learning.
+
+
+## Ressources:
+ - [Normalization - Wikipedia](https://en.wikipedia.org/wiki/Standard_score)
