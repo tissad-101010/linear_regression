@@ -1,0 +1,19 @@
+
+
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    install_dependencies.sh                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/02/05 15:45:07 by tissad            #+#    #+#              #
+#    Updated: 2026/02/05 15:45:08 by tissad           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# This script installs the required dependencies for the linear regression project.
+
+pandas==2.0.0
+numpy==1.24.0
+matplotlib==3.5.0
