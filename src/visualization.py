@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    visualization.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
+#    By: issad <issad@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 16:24:11 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 17:11:10 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/05 23:58:39 by issad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,3 +47,65 @@ def save_plot(plt, filename):
     """
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"✓ Plot saved as '{filename}'")
+
+
+def plot_regression(data, model, stats, title="Linear Regression Fit (km vs price)"):
+    """
+    Function to visualize the data along with the fitted linear regression line.
+    
+    Args:
+        data (pd.DataFrame): The DataFrame containing the data to be visualized.
+        model: The fitted linear regression model with a predict method.
+        stats (dict): Normalization statistics
+        title (str): Title of the plot
+    """
+    plt.figure(figsize=(12, 7))
+    
+    #   Scatter plot of the original data points
+    plt.scatter(data['km'], data['price'], alpha=0.6, color='blue', 
+                label='original data', edgecolors='black', s=50)
+    
+    # Regression line
+    km_range = np.linspace(data['km'].min(), data['km'].max(), 100)
+    km_normalized = (km_range - stats['km_mean']) / stats['km_std']
+    price_normalized = model.predict(km_normalized)
+    price_range = price_normalized * stats['price_std'] + stats['price_mean']
+    
+    plt.plot(km_range, price_range, color='red', linewidth=2, 
+             label='Regression line')
+    
+    plt.xlabel('Mileage (km)', fontsize=12)
+    plt.ylabel('Price', fontsize=12)
+    plt.title(title, fontsize=14, fontweight='bold')
+    plt.legend(fontsize=11)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    return plt
+
+
+def display_statistics(stats):
+    """
+    Function to display the calculated statistics in a formatted manner.
+    
+    Args:
+        stats (dict): A dictionary containing the calculated statistics 
+        for the 'km' and 'price' columns.
+    """
+    print("\n" + "="*60)
+    print("📊 STATISTICAL ANALYSIS".center(60))
+    print("="*60)
+    
+    print("\n🚗 MILEAGE (KM):")
+    print(f"  - Minimum:  {stats['km']['min']:>10.0f} km")
+    print(f"  - Maximum:  {stats['km']['max']:>10.0f} km")
+    print(f"  - Mean:  {stats['km']['mean']:>10.0f} km")
+    print(f"  - median:  {stats['km']['median']:>10.0f} km")
+    print(f"  - Standard Deviation: {stats['km']['std']:>8.0f} km")
+    
+    print("\n💰 PRICE:")
+    print(f"  - Minimum:  {stats['price']['min']:>10.0f}")
+    print(f"  - Maximum:  {stats['price']['max']:>10.0f}")
+    print(f"  - Mean:  {stats['price']['mean']:>10.0f}")
+    print(f"  - median:  {stats['price']['median']:>10.0f}")
+    print(f"  - Standard Deviation: {stats['price']['std']:>8.0f}")
+    print("="*60)

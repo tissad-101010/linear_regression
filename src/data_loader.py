@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    data_loader.py                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
+#    By: issad <issad@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 15:34:29 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 17:24:50 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/06 00:42:52 by issad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ def load_data(filepath):
     
 
 
-#mormalize the data
+#normalize the data
 def normalize_data(data):
     """
     Function to normalize the data using  z-score normalization.
@@ -75,4 +75,33 @@ def normalize_data(data):
     
     return normalized_data, stats
 
+def get_statistics(data):
+    """
+    Function to calculate basic statistics (min, max, mean, median, std)
+      for the 'km' and 'price' columns.
     
+    Args:
+        data (pd.DataFrame): The DataFrame containing the data for which 
+        statistics are to be calculated.
+        
+    Returns:
+        dict: Calculated statistics
+    """
+    stats = {
+        'km': {
+            'min': data['km'].min(),
+            'max': data['km'].max(),
+            'mean': data['km'].mean(),
+            'median': data['km'].median(),
+            'std': data['km'].std()
+        },
+        'price': {
+            'min': data['price'].min(),
+            'max': data['price'].max(),
+            'mean': data['price'].mean(),
+            'median': data['price'].median(),
+            'std': data['price'].std()
+        }
+    }
+    
+    return stats
