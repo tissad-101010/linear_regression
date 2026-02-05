@@ -6,7 +6,7 @@
 #    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 16:27:33 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 17:26:17 by tissad           ###   ########.fr        #
+#    Updated: 2026/02/05 17:51:00 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ Docstring pour main
 
 from data_loader import load_data, normalize_data
 from visualization import plot_data, save_plot
-
+import pandas as pd
 
 def main():
     # Load the data
@@ -37,7 +37,9 @@ def main():
         print("-" * 60)
         print("✓First 5 rows of normalized data:")
         print(normalized_data.head())        
+        print("-" * 60) 
         # Visualize the original data
+
         plot = plot_data(normalized_data, title="Normalized data visualization (km vs price)")
         # plot.show()
         save_plot(plot, './plot/normalized_data_plot.png')
