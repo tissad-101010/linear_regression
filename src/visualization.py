@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    visualization.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: issad <issad@student.42.fr>                +#+  +:+       +#+         #
+#    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 16:24:11 by tissad            #+#    #+#              #
-#    Updated: 2026/02/05 23:58:39 by issad            ###   ########.fr        #
+#    Updated: 2026/02/06 13:30:27 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,28 @@ def plot_regression(data, model, stats, title="Linear Regression Fit (km vs pric
     plt.ylabel('Price', fontsize=12)
     plt.title(title, fontsize=14, fontweight='bold')
     plt.legend(fontsize=11)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    return plt
+
+
+def plot_cost_history(cost_history, title="Cost History During Training"):
+    """
+    Function to visualize the cost history during training.
+    The cost illustrates how the model's error decreases over iterations,
+    which can help in understanding the convergence 
+    of the gradient descent algorithm.
+    
+    Args:
+        cost_history (list): A list of cost function values recorded 
+        at each iteration of training.
+        title (str): Title of the plot
+    """
+    plt.figure(figsize=(10, 6))
+    plt.plot(cost_history, color='green', linewidth=2)
+    plt.xlabel('Iteration', fontsize=12)
+    plt.ylabel('Cost (MSE)', fontsize=12)
+    plt.title(title, fontsize=14, fontweight='bold')
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     return plt

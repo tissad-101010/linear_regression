@@ -274,4 +274,5 @@ After running the project, you should see:
 ![original_data](./plot/original_data_plot.png)
 * A plot of the normalized data (mileage vs price)
 ![normalized_data](./plot/normalized_data_plot.png)
-
+* A plot of the linear regression line fitted to the normalized data
+![regression_line](./plot/regression_fit_plot.png)

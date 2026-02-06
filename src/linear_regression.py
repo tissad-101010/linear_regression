@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    linear_regression.py                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: issad <issad@student.42.fr>                +#+  +:+       +#+         #
+#    By: tissad <tissad@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 18:04:09 by tissad            #+#    #+#              #
-#    Updated: 2026/02/06 00:41:24 by issad            ###   ########.fr        #
+#    Updated: 2026/02/06 15:00:46 by tissad           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ class LinearRegression:
         self.theta0 = 0.0  # Intercept
         self.theta1 = 0.0  # Slope
         self.cost_history = []  # To store cost function values during training
-    def compute_cost(self, X, y):
+    def compute_cost(self, errors, m):
         """
         Compute the cost function for linear regression.
         
@@ -55,14 +55,8 @@ class LinearRegression:
         Returns:
         float: The computed cost value.
         """
-        m = len(y)
-        # Calculate the predicted values based on current parameters
-        predictions = self.theta0 + self.theta1 * X
-        # Calculate the errors between predictions and actual target values
-        errors = predictions - y
         # Compute the cost using the mean squared error formula
-        cost = (1/(2*m)) * np.sum(errors ** 2)
-        return cost
+        return (1/(m)) * np.sum(errors ** 2)
         
     
         
@@ -91,16 +85,16 @@ class LinearRegression:
             self.theta1 -= self.learning_rate * d_theta1
             
             # Compute the cost function value after updating parameters
-            cost = self.compute_cost(X, y)
-            self.cost_history.append(cost)
+            cost = self.compute_cost(errors, m)
+            self.cost_history.append(cost) # Store cost for analysis
             
             if iteration % plot_interval == 0 or iteration == self.n_iterations - 1:
-                print(f"Iteration {iteration}: Cost = {cost:.6f}, theta0 = {self.theta0:.8f}, theta1 = {self.theta1:.4f}")
+                print(f"Iteration {iteration}: Cost = {cost:.6f}, theta0 = {self.theta0:.4e}, theta1 = {self.theta1:.4f}")
                 # Optionally, plot the fit at certain iterations to visualize convergence
                 if data is not None and norm_stat is not None and plot_fit:
                     plt = plot_regression(data, self, norm_stat, title=f"Iteration {iteration} Fit")
                     plt.show(block=False)  # Non-blocking show to allow the loop to continue
-                    plt.pause(2)           # Pause to display the plot for a short time
+                    plt.pause(3)           # Pause to display the plot for a short time
                     plt.close()            # Close the plot to avoid too many open windows during training
             
             # Check for convergence by comparing the change in cost function value
@@ -118,10 +112,10 @@ class LinearRegression:
         """
         plot_fit = input("Do you want to visualize the fit during training? (y/n): ").strip().lower() == 'y'
         print("✓Starting gradient descent...")
-        print(f"✓Initial cost: {self.compute_cost(X, y):.6f}")
         self.gradient_descent(X, y, plot_fit=plot_fit, data=data, norm_stat=norm_stat)
-        print(f"✓Final cost: {self.cost_history[-1]:.6f}")
-        print(f"✓Learned parameters: theta0 = {self.theta0:.4f}, theta1 = {self.theta1:.4f}")  
+        print(f"First cost: {self.cost_history[0]:.6f}  ")
+        print(f"Final cost: {self.cost_history[-1]:.6f}")
+        print(f"✓Learned parameters: theta0 = {self.theta0:.4e}, theta1 = {self.theta1:.4f}")  
         
     def predict(self, X):
         """
@@ -134,3 +128,4 @@ class LinearRegression:
         numpy array: The predicted target values based on the input features.
         """
         return self.theta0 + self.theta1 * X
+    
