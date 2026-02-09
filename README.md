@@ -249,11 +249,14 @@ This project serves as a solid first step into machine learning.
 * Pandas
 * Matplotlib
 
-## Ressources:
- - [Normalization - Wikipedia](https://en.wikipedia.org/wiki/Standard_score)
+
 
 ## RUN THE PROJECT
 1. Clone the repository
+    ``` bash
+    git clone git@github.com:tissad-101010/linear_regression.git &&
+    cd linear_regression
+    ```
 2. Install dependencies
     ``` bash
     pip install -r requirements.txt
@@ -261,14 +264,38 @@ This project serves as a solid first step into machine learning.
     make install
 
     ```
-3. Run
+3. fit the linear regression model
     ``` bash
-    python src/main.py
+    python src/linear_regression_main.py --data_file data/data.csv
     #or
-    make run
-    ```
+    make fit # data_file=data/data.csv
 
+    ```
+4. predict the price of a car with a specific mileage
+    ``` bash
+    python src/predict_price.py --model_file ./models/model_params.json 
+    make predict # model_file=./models/model_params.json
+
+    ```
+5. evaluate the model on a test set
+    ``` bash
+    python src/evaluate_model.py --model_file ./models/model_params.json --test_data_file data/test_data.csv
+    make evaluate # model_file=./models/model_params.json test_data_file=data/test_data.csv
+
+    ```
 ## Results
+* The final values of `θ0` and `θ1`
+    - models : [model_params.json](./models/model_params.json)
+    ```json
+    {
+        "theta0": 2.220446049250309e-16,
+        "theta1": -0.8521449950897367,
+        "km_mean": 101066.25,
+        "km_std": 52674.24560550151,
+        "price_mean": 6331.833333333333,
+        "price_std": 1319.6541927360352
+    }
+    ```
 After running the project, you should see:
 * A plot of the original data (mileage vs price)
 ![original_data](./plot/original_data_plot.png)
@@ -276,3 +303,15 @@ After running the project, you should see:
 ![normalized_data](./plot/normalized_data_plot.png)
 * A plot of the linear regression line fitted to the normalized data
 ![regression_line](./plot/regression_fit_plot.png)
+* The cost history over iterations, showing how the cost decreases as the model learns
+![final_cost](./plot/cost_history.png)
+
+
+## Ressources:
+- [Normalization - Wikipedia](https://en.wikipedia.org/wiki/Standard_score)
+- [Gradient Descent - Wikipedia](https://en.wikipedia.org/wiki/Gradient_descent)
+- [Cost Function - Wikipedia](https://en.wikipedia.org/wiki/Cost_function)
+- [Linear Regression - Wikipedia](https://en.wikipedia.org/wiki/Linear_regression)
+
+## Author
+**Tissad** - [GitHub](https://github.com/tissad-101010) - [LinkedIn](https://www.linkedin.com/in/tahar-issad-00b96836a/)
